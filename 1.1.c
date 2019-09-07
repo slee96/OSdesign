@@ -4,19 +4,23 @@
 
 
 int main(int argc, char *argv[]) {
+  // Decalre variables k, p, q
   int k = atoi(argv[1]), p = atoi(argv[2]), q = atoi(argv[3]);
-  int array[sizeof(q) + 1];
+  // Find the starting point 10^k-1
   int start = pow(10, k -1);
 
   for (int i = start; i < q; i++){
+    // Reset sum & temp each itteration
     int sum = 0;
-    // J is less than the length of start (e.g. if start=100, length would be 3)
     int temp = i;
-    for (int j = 0; j < sizeof(i) -1; j++){
-      int didget = temp % 10;
+    for (int j = 0; j < k; j++){
+      // Get the last number in the integer
+      int diget = temp % 10;
       temp = temp / 10;
-      sum += pow(didget, k);
-      if ((sum == i) && (j == (sizeof(i) -2))){
+      // Append the last number to the power of k
+      sum += pow(diget, k);
+      //If the sum equals i, and its the last itteration 
+      if ( (sum == i) && (j == (k - 1)) ) {
         printf("%d\n", i);
       }
     }
