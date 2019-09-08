@@ -8,7 +8,7 @@ char *rmchr(char *string, char *character){
   int length = strlen(string);
   // for loop to itterate throught the string
   for (int i = 0; i < length; i++){
-    // If the character to remove is equal character at index[i] remove the character
+    // If statement to remoed character from the string at index[i] if its the same as the character to search for
     if (character[0] == string[i]){
       // Code to remove caracter to come
       
