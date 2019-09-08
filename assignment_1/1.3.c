@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 #include <string.h>
 
 char *rmchr(char *string, char *character){
@@ -12,13 +10,13 @@ char *rmchr(char *string, char *character){
     if (character[0] == string[i]){
       // set counter equal to the index of found character
       int counter = i;
-      length --;
       while(string[counter + 1] != '\0'){
         // shift the string starting at counter
         string[counter] = string[counter +1];
         counter++;
       }
       // writes null character to the end of the string
+      length --;
       string[length -1] = '\0';
     }
   }
