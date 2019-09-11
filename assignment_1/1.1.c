@@ -13,16 +13,16 @@ int main(int argc, char *argv[]) {
     // Reset sum & temp each itteration
     int sum = 0;
     int temp = i;
-    for (int j = 0; j < k; j++){
+   while ( temp > 0 ) {   
       // Get the last number in the integer
-      int diget = temp % 10;
+      int digit = temp % 10;
       temp = temp / 10;
       // Append the last number to the power of k
-      sum += pow(diget, k);
+      sum += pow(digit, k);
       //If the sum equals i, and its the last itteration 
-      if ( (sum == i) && (j == (k - 1)) ) {
-        printf("%d\n", i);
-      }
+    }
+    if (sum == i){
+	printf("%d\n", i);
     }
   }
   return 0;
