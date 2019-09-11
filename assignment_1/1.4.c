@@ -2,7 +2,7 @@
 #include <string.h>
 
 char *rmchr(char *string, char *characters){
-  // for loop to itterate throught the string's
+  // for loop to iterate throught the string's
   for (int i = 0; i < strlen(string); i++){
     for (int j = 0; j < strlen(characters); j++){
       // If statement to remoed character from the string at index[i] if its the same as the character to search for
