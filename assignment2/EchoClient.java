@@ -11,5 +11,20 @@ public class EchoClient {
         BufferedReader stdinReader = null;
         PrintWriter output = null;
 
+        try{
+            socket = new Socket(serverName, 8080);
+            serverReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            stdinReader = new BufferedReader(new InputStreamReader(System.in));
+            output = new PrintWriter(socket.getOutputStream(), true);
+            String input;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                socket.close();
+            } catch (IOException e) {e.printStackTrace();}
+        }
+
     }
 }
