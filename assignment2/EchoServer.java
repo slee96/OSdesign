@@ -21,11 +21,20 @@ public class EchoServer extends Thread {
         BufferedReader reader;
         PrintWriter output;
         try {
+            // server infinite loop
+            while (true) {
+                Socket socket = serverSocket.accept();
+                reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                output = new PrintWriter(socket.getOutputStream(), true);
 
+                // Response/Echo infinite loop
+                while (true) {
+                    output.println("Server: " + reader.readLine());
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
 
