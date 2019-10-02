@@ -5,12 +5,21 @@
 #include <sys/stat.h>
 
 int main(int argc, char * argv[]){
-    // pd = Pipe Direction
-    int pd[2];
+
+    // pd = Pipe Direction fd = File Description
+    int pd[2],fd;
+    //Storage for File Data
+    struct stat fs; 
+    //File Pointer
+    FILE *fptr;	
+    //Get Filesize
+    stat(argv[1],&fs);  
+    //Gets File Size in Bytes
+    int filesize = fs.st_size; 
     //Child PID
     pid_t childpid;
     //buffer for file
-    char buffer[filesize]
+    char buffer[filesize];
 
     //Create Pipe
     pipe(pd);
@@ -22,21 +31,36 @@ int main(int argc, char * argv[]){
     
     }//Child Start
     if(childpid == 0){
-	    
 	    //Closes Output (only input needed) 
 	    close(pd[1]);
-	    //Read buffer from input 
+	    //Create Copy 
+	    fptr = fopen(argv[2], "w"); 
+	    //Verify Creation
+	    if(fptr == NULL){
+		    exit(0);
+	    }
+	    //Read buffer from input
 	    read(pd[0],buffer,sizeof(buffer)); 
-
+	    //Write buffer to Copy     
+	    fwrite(buffer,sizeof(char),sizeof(buffer),fptr); 
+	    //Close File I/O Stream
+	    fclose(fptr); 
     }//Child End
     else
     {//Parent Start
-	    
 	    //Closes Input (only output needed)
       	    close(pd[0]);
-	    //Writes String to Pipe
+	    //Open Original File
+	    fptr = fopen(argv[1], "r");
+	    //Checks Existance 
+	    if (fptr == NULL){
+		     exit(0);
+            } 
+	    //Read File to Buffer
+	    fread(&buffer,sizeof(char),sizeof(buffer),fptr); 
+	    //Writes File to Pipe
             write(pd[1],buffer,sizeof(buffer)); 	    
-
+	    //Closes File I/O Stream
     }//Parent End
 
     return 0;
