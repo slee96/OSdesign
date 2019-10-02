@@ -18,6 +18,13 @@ public class EchoServer extends Thread {
     }
 
     public void run() {
+        BufferedReader reader;
+        PrintWriter output;
+        try {
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
