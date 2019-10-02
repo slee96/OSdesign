@@ -6,7 +6,7 @@
 
 int main(int argc, char * argv[]){
     //Argument Error Handling
-    if(sizeof(argc) != 2){
+    if(argc != 3){
            fprintf(stderr,"usage ./filecopy arg1 arg2\n");
             exit(EXIT_FAILURE);
     }	 
