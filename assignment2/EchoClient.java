@@ -18,6 +18,12 @@ public class EchoClient {
             output = new PrintWriter(socket.getOutputStream(), true);
             String input;
 
+            while (true) {
+                input = stdinReader.readLine();
+                if(input.equals(".")) break;
+                output.println(input);
+                System.out.print(serverReader.readLine() + "\n");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
