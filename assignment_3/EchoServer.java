@@ -5,18 +5,34 @@ public class EchoServer extends Thread {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(8080);
 
-        while (true){
+        while (true) {
             Socket socket = null;
-            try{
+            try {
                 socket = serverSocket.accept();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
 
-            }catch (Exception e) {
+                Thread t = new threadHandler(socket, reader, output);
+
+                t.start();
+
+            } catch (Exception e) {
+                socket.close();
                 e.printStackTrace();
             }
         }
 
+    }
+}
+class threadHandler extends Thread{
+    private Socket s;
+    private BufferedReader in;
+    private PrintWriter out;
+
+    public threadHandler(Socket s, BufferedReader in, PrintWriter out){
+        this.s = s;
+        this.in = in;
+        this.out = out;
     }
 
     public void run() {
