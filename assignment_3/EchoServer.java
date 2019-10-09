@@ -36,21 +36,19 @@ class threadHandler extends Thread{
     }
 
     public void run() {
-        //BufferedReader reader;
-        //PrintWriter output;
         try {
-            // server infinite loop
-            //while (true) {
-                //Socket socket = serverSocket.accept();
-                //reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                //output = new PrintWriter(socket.getOutputStream(), true);
-
-                // Response/Echo infinite loop
-                while (true) {
-                    output.println("Server: " + reader.readLine());
-                }
-            //}
+            // Response/Echo infinite loop
+            while (true) {
+                out.println("Server: " + in.readLine());
+            }
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            s.close();
+            out.close();
+            in.close();
+        }catch (IOException e){
             e.printStackTrace();
         }
     }
