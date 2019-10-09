@@ -5,7 +5,11 @@
 #include <sys/stat.h>
 
 int main(int argc, char * argv[]){
-
+    //Argument Error Handling
+    if(argc != 3){
+           fprintf(stderr,"usage ./filecopy arg1 arg2\n");
+            exit(EXIT_FAILURE);
+    }	 
     // pd = Pipe Direction fd = File Description
     int pd[2],fd;
     //Storage for File Data
